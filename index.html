@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#play14 KL — Choose Your Player</title>
+  <meta name="description" content="The #play14 KL player roster — choose your player!">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="crt"></div>
+
+  <div id="gate" class="gate">
+    <div class="gate-box">
+      <p class="gate-logo"><span class="l-hash">#</span><span class="l-p">p</span><span class="l-l">l</span><span class="l-a">a</span><span class="l-y">y</span><span class="l-14">14</span> <span class="logo-kl">KL</span></p>
+      <p class="gate-label">ENTER ACCESS CODE</p>
+      <input id="gate-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="32" aria-label="Access code">
+      <button id="gate-btn">INSERT COIN</button>
+      <p id="gate-err" class="gate-err">ACCESS DENIED — TRY AGAIN</p>
+      <p class="gate-hint">The code is shared at the event.</p>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <h1 class="logo" aria-label="#play14 KL">
+      <span class="l-hash">#</span><span class="l-p">p</span><span class="l-l">l</span><span class="l-a">a</span><span class="l-y">y</span><span class="l-14">14</span> <span class="logo-kl">KL</span>
+    </h1>
+    <p class="choose-banner">CHOOSE YOUR PLAYER</p>
+  </header>
+
+  <main class="stage">
+    <section class="selected-panel" aria-live="polite">
+      <div class="card-col">
+        <div class="card-stage">
+          <div id="card-flipper" class="card-flipper">
+            <div class="card-face card-front">
+              <div class="card-holo"></div>
+              <img id="sel-avatar" class="sel-avatar" src="" alt="">
+            </div>
+            <div class="card-face card-back">
+              <img src="avatars/card-back.jpg" alt="Card back">
+            </div>
+          </div>
+        </div>
+        <div class="sel-chips">
+          <span class="chip"><span class="chip-label">ZONE</span> <span id="sel-env"></span></span>
+          <span class="chip"><span class="chip-label">GEAR</span> <span id="sel-attire"></span></span>
+        </div>
+      </div>
+      <div class="sel-info">
+        <p class="sel-tagline">"<span id="sel-tagline"></span>"</p>
+        <h2 id="sel-name" class="sel-name"></h2>
+        <div class="sel-badges">
+          <span id="sel-class" class="badge badge-class"></span>
+          <span id="sel-hexad" class="badge badge-hexad"></span>
+        </div>
+        <div class="stat-sheet">
+          <p class="stat-title">HEXAD PROFILE</p>
+          <div id="hexad-stats" class="hexad-stats"></div>
+        </div>
+        <p id="sel-blurb" class="sel-blurb"></p>
+      </div>
+    </section>
+
+    <section class="roster" aria-label="Player roster">
+      <div id="grid" class="grid" role="listbox" aria-label="Players"></div>
+    </section>
+  </main>
+
+  <footer class="marquee">
+    <button id="sound-toggle" class="sound-toggle" aria-pressed="true" title="Toggle sound">🔊 SOUND ON</button>
+    <p class="insert-coin">INSERT COIN · #play14 KL</p>
+  </footer>
+
+  <audio id="theme" src="audio/theme.mp3" loop preload="auto"></audio>
+
+  <script src="roster.enc.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/gate.js"></script>
+</body>
+</html>
