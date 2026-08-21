@@ -144,6 +144,17 @@ window.APP_INIT = function (roster) {
     document.getElementById("sel-avatar").src = p.avatar;
     document.getElementById("sel-avatar").alt = p.name + " card";
     document.getElementById("sel-name").textContent = p.name;
+    // optional LinkedIn tile on the nameplate (only players with a link)
+    var li = document.getElementById("sel-linkedin");
+    if (p.linkedin) {
+      var url = p.linkedin.trim().split("?")[0];
+      if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+      li.href = url;
+      li.hidden = false;
+    } else {
+      li.hidden = true;
+      li.removeAttribute("href");
+    }
     document.getElementById("sel-tagline").textContent = p.tagline;
     document.getElementById("sel-tagline").parentElement.style.visibility = p.tagline ? "visible" : "hidden";
     document.getElementById("sel-class").textContent = p.class.toUpperCase();
