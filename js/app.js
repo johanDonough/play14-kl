@@ -171,15 +171,26 @@ window.APP_INIT = function (roster) {
   var flipping = false;
   var displayedIndex = 0; // player currently shown on the card front
 
-  // Smooth-scroll back to the panel; the flip's mid-animation DOM swap can
-  // cancel an in-flight smooth scroll, so snap instantly if it didn't land.
+  // Scroll back to the top to show the reveal. Self-driven animation:
+  // browser-native smooth scrolling gets cancelled by the flip's
+  // mid-animation layout changes (scroll anchoring), so we re-assert the
+  // position every frame until it lands.
   function scrollToPanel() {
     var panel = document.querySelector(".selected-panel");
-    if (panel.getBoundingClientRect().top >= 0) return;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (panel.getBoundingClientRect().top >= 0) return; // already in view (desktop sticky)
+    var start = window.scrollY;
+    var t0 = performance.now(), DUR = 450;
+    function step(now) {
+      var k = Math.min(1, (now - t0) / DUR);
+      var ease = 1 - Math.pow(1 - k, 3);
+      window.scrollTo(0, Math.round(start * (1 - ease)));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    // belt-and-braces: if frames were throttled away, land instantly
     setTimeout(function () {
       if (panel.getBoundingClientRect().top < -12) window.scrollTo(0, 0);
-    }, 900);
+    }, DUR + 250);
   }
 
   function highlight(i) {

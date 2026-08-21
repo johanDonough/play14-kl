@@ -19,7 +19,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scrollbar-gutter: stable; }
+html { scrollbar-gutter: stable; overflow-anchor: none; }
 
 body {
   /* deep purple-blue wash + circuit traces, echoing the card back */
