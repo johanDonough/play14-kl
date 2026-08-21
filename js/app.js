@@ -171,6 +171,17 @@ window.APP_INIT = function (roster) {
   var flipping = false;
   var displayedIndex = 0; // player currently shown on the card front
 
+  // Smooth-scroll back to the panel; the flip's mid-animation DOM swap can
+  // cancel an in-flight smooth scroll, so snap instantly if it didn't land.
+  function scrollToPanel() {
+    var panel = document.querySelector(".selected-panel");
+    if (panel.getBoundingClientRect().top >= 0) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(function () {
+      if (panel.getBoundingClientRect().top < -12) window.scrollTo(0, 0);
+    }, 900);
+  }
+
   function highlight(i) {
     var tiles = grid.children;
     for (var t = 0; t < tiles.length; t++) {
@@ -204,6 +215,9 @@ window.APP_INIT = function (roster) {
     selected = (i + roster.length) % roster.length;
     highlight(selected);
     if (!instant) blip(660);
+
+    // picking from deep in the roster: bring the details panel back into view
+    if (!instant) scrollToPanel();
 
     if (instant || reducedMotion) {
       renderDetails(roster[selected]);
